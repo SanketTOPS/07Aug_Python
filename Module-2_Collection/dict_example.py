@@ -1,4 +1,4 @@
-stdata={'id':101,'name':'sanket','sub':'python'}
+stdata={'id':101,'name':'sanket','sub':'python'} #static
 """print(stdata)
 print(stdata['sub'])
 print(stdata.get('name'))"""
