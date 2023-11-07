@@ -8,6 +8,7 @@ def index(request):
         fnm=request.POST['firstname']
         lnm=request.POST['lastname']
         email=request.POST['email']
+
         dob=request.POST['dob']
         mob=request.POST['mobile']
         adr=request.POST['address']
