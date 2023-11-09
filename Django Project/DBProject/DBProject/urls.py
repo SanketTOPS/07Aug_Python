@@ -21,4 +21,6 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index),
+    path('showdata/',views.showdata,name='showdata'),
+    path('updatedata/<int:id>',views.updatedata),
 ]
