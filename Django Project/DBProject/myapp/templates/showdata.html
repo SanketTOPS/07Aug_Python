@@ -30,6 +30,7 @@
             <th>Mobile</th>
             <th>Address</th>
             <th>Update</th>
+            <th>Delete</th>
         </tr>
         {% for i in data %}
         <tr>
@@ -41,6 +42,7 @@
             <td>{{i.mobile}}</td>
             <td>{{i.address}}</td>
             <td><a href="/updatedata/{{i.id}}">Update</a></td>
+            <td><a href="/deletedata/{{i.id}}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>

@@ -39,3 +39,8 @@ def updatedata(request,id):
         print("Error!")
     return render(request,'updatedata.html',{'stid':stid})
     
+
+def deletedata(request,id):
+    stid=userinfo.objects.get(id=id)
+    userinfo.delete(stid)
+    return redirect('showdata')
