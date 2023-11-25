@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showdata</title>
+</head>
+<body style="background-color: azure;">
+    <center><h1>Showdata</h1></center>
+    <hr>
+    <!-- {{data}} -->
+    <table border="1" align="center">
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>City</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.firstname}}</td>
+            <td>{{i.lastname}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.dob}}</td>
+            <td>{{i.city}}</td>
+            <td><a href="/updatedata/{{i.id}}">Update</a></td>
+            <td><a href="/deletedata/{{i.id}}">Delete</a></td>
+        </tr>
+        {% endfor%}
+    </table>
+</body>
+</html>

@@ -8,3 +8,4 @@ class userInfo(models.Model):
     email=models.EmailField()
     dob=models.DateField()
     city=models.CharField(max_length=20)
+    
