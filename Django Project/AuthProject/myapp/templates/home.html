@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+
 <body style="background-color: azure;">
-    <center><h1>Welcome to HOME</h1></center>
+    <center>
+        <h1>Welcome, {{cuser}}</h1>
+    </center>
     <hr>
+    {% if cuser is none %}
+    <a href="/">Login</a>
+    {% else %}
+    <a href="/userlogout">Logout</a>
+    <hr>
+    <hr>
+    <center>
+        <h1>Hello TOPS</h1>
+    </center>
+    {% endif %}
+
 </body>
+
 </html>

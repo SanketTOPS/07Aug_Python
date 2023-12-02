@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -12,6 +13,7 @@ def index(request):
         user=signupdata.objects.filter(username=unm,password=pas)
         if user: #true
             print("Login Successfully!")
+            request.session['user']=unm #session create
             return redirect('home')
         else:
             print("Error!Login faild....Try again")
@@ -29,4 +31,10 @@ def usersignup(request):
     return render(request,'usersignup.html')
 
 def home(request):
-    return render(request,'home.html')
+    user=request.session.get('user')
+    return render(request,'home.html',{'cuser':user})
+
+def userlogout(request):
+    logout(request)
+    return redirect('/')
+
