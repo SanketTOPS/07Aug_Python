@@ -10,10 +10,13 @@ def index(request):
         unm=request.POST['username']
         pas=request.POST['password']
 
+        fnm=signupdata.objects.get(username=unm)
+        print("Firstname:",fnm.firstname)
         user=signupdata.objects.filter(username=unm,password=pas)
         if user: #true
             print("Login Successfully!")
-            request.session['user']=unm #session create
+            #request.session['user']=unm #session create
+            request.session['user']=fnm.firstname
             return redirect('home')
         else:
             print("Error!Login faild....Try again")
