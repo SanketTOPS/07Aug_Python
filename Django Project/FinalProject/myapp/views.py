@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
+from django.contrib.auth import logout
 
 # Create your views here.
 
+status=False
 def index(request):
+    global status
     if request.method=='POST':
         if request.POST.get('signup')=='signup':
             newuser=signupForm(request.POST)
@@ -21,12 +24,18 @@ def index(request):
             user=signupmaster.objects.filter(username=unm,password=pas)
             if user:
                 print("Login Successfully!")
+                request.session['user']=unm
+                #msg="Login Successfully!"
+                status=True
+                return redirect('notes')
             else:
                 print("Error!Login Fail...Try again")
     return render(request,'index.html')
 
 def notes(request):
-    return render(request,'notes.html')
+    #global status
+    user=request.session.get('user')
+    return render(request,'notes.html',{'user':user})
 
 def profile(request):
     return render(request,'profile.html')
@@ -36,3 +45,8 @@ def about(request):
 
 def contact(request):
     return render(request,'contact.html')
+
+
+def userlogout(request):
+    logout(request)
+    return redirect('/')
