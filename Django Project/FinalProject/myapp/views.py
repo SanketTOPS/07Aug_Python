@@ -36,6 +36,13 @@ def index(request):
 def notes(request):
     #global status
     user=request.session.get('user')
+    if request.method=='POST':
+        newnotes=notesForm(request.POST, request.FILES)
+        if newnotes.is_valid():
+            newnotes.save()
+            print("Signup Successfully!")
+        else:
+            print(newnotes.errors)
     return render(request,'notes.html',{'user':user})
 
 def profile(request):
