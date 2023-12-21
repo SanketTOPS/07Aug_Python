@@ -3,8 +3,6 @@ from .forms import *
 from .models import *
 from django.contrib.auth import logout
 
-# Create your views here.
-
 status=False
 def index(request):
     global status
@@ -49,7 +47,7 @@ def profile(request):
         if newuser.is_valid():
             newuser.save()
             print("Profile updated!")
-            return redirect('notes')
+            return redirect("notes")
         else:
             print(newuser.errors)
     return render(request,'profile.html',{'user':user,'cuser':cuser})
@@ -59,7 +57,6 @@ def about(request):
 
 def contact(request):
     return render(request,'contact.html')
-
 
 def userlogout(request):
     logout(request)
