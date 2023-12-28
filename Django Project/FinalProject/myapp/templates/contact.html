@@ -113,7 +113,8 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="col-lg-6 col-12">
                         <h2 class="mb-4">Let's <span>begin</span></h2>
 
-                        <form class="contact-form me-lg-5 pe-lg-3" role="form">
+                        <form method="post" class="contact-form me-lg-5 pe-lg-3" role="form">
+                            {% csrf_token %}
 
                             <div class="form-floating">
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Full name"
@@ -130,14 +131,14 @@ https://www.tooplate.com/view/2127-little-fashion
                             </div>
 
                             <div class="form-floating my-4">
-                                <input type="subject" name="subject" id="subject" class="form-control"
+                                <input type="subject" name="sub" id="subject" class="form-control"
                                     placeholder="Subject" required>
 
                                 <label for="subject">Subject</label>
                             </div>
 
                             <div class="form-floating mb-4">
-                                <textarea id="message" name="message" class="form-control"
+                                <textarea id="message" name="msg" class="form-control"
                                     placeholder="Leave a comment here" required style="height: 160px"></textarea>
 
                                 <label for="message">Tell us about the project</label>

@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
 from django.contrib.auth import logout
+from django.core.mail import send_mail
+from FinalProject import settings
+import random
 
 status=False
 def index(request):
@@ -63,6 +66,25 @@ def about(request):
     return render(request,'about.html')
 
 def contact(request):
+    if request.method=='POST':
+        newfeedback=feedbackForm(request.POST)
+        if newfeedback.is_valid():
+            newfeedback.save()
+            print("Your feedback has been submitted!")
+
+            #Email Send
+            otp=random.randint(1111,9999)
+            sub="Thank you!"
+            msg=f"Hello {request.POST['name']}!\n\nWe have received your feedback.\nWe will contact you in shortly.\n\nIf any queries regarding, contact us anytime on\n\n +91 9724799469 | sanket.tops@gmail.com\n\nThanks & Regards!\nTOPS Technologies Pvt Ltd - Rajkot\nYour OTP is:{otp}\n 972479949 | help@tops-int.com | www.tops-int.com"            
+            from_mail=settings.EMAIL_HOST_USER
+            to_mail=['dhrutidharkotadiya51@gmail.com','djangotestingpython@gmail.com']
+            #to_mail=[request.POST['email']]
+
+            send_mail(subject=sub,message=msg,from_email=from_mail,recipient_list=to_mail)
+
+            
+        else:
+            print(newfeedback.errors)
     return render(request,'contact.html')
 
 def userlogout(request):
