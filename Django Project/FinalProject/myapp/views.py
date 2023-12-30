@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 from django.core.mail import send_mail
 from FinalProject import settings
 import random
+import requests
 
 status=False
 def index(request):
@@ -82,7 +83,17 @@ def contact(request):
 
             send_mail(subject=sub,message=msg,from_email=from_mail,recipient_list=to_mail)
 
-            
+
+            #OTP Sending
+            url = "https://www.fast2sms.com/dev/bulkV2"
+            #querystring = {"authorization":"KEodGZf5On3eCxJPkWAFHQUYtS86Rbmrv1MyuViag4hs7N2DujvzKSw5MN9mRryb3LC4DsIHiWph78","variables_values":f"{otp}","route":"otp","numbers":f"{request.POST['mob']}"}
+
+            querystring = {"authorization":"KEodGZf5cn3eCxJPkWAFHQUYtS86Rbmrv1MyuViag4hs7N2DujvzKSw5MN9mRryb3LC4DsIHiWph78","message":f"Dear User\nGood Morning from TOPS Technologies\nvisit:www.tops-int.com","language":"english","route":"q","numbers":"9586632371,6352789893,8239430873"}
+            headers = {
+                'cache-control': "no-cache"
+            }
+            response = requests.request("GET", url, headers=headers, params=querystring)
+            print(response.text)
         else:
             print(newfeedback.errors)
     return render(request,'contact.html')
