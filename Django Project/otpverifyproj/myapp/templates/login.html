@@ -58,6 +58,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
+            <hr>
+            {% load socialaccount %}
+            <a class="btn btn-danger" href="{% provider_login_url 'google'%}?next=/">Login with Gmail</a>
+            <a class="btn btn-primary" href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
         </div>
     </div>
 </body>

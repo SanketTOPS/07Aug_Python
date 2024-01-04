@@ -38,7 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'social_django', #social_auth
+
+    'django.contrib.sites', # must
+    'allauth', # must
+    'allauth.account', # must
+    'allauth.socialaccount', # must
+    'allauth.socialaccount.providers.google', # new
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware', #social_auth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'otpverifyproj.urls'
@@ -63,10 +74,23 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',  #social_auth
+                'social_django.context_processors.login_redirect', #social_auth
+
             ],
         },
     },
 ]
+
+#social_auth
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
 
 WSGI_APPLICATION = 'otpverifyproj.wsgi.application'
 
@@ -130,3 +154,13 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "06octdm@gmail.com"
 EMAIL_HOST_PASSWORD = "fvfl ygen binz jibz"
+
+
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1052934099309335'  
+SOCIAL_AUTH_FACEBOOK_SECRET = '7dfb9addd26b2bfdfc93dc2275ae0d2a' 
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY  = '112108709539-1m6b7vt3dbtsuu6jddn1nj9teroaf3lh.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
