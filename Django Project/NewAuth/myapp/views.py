@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -34,9 +35,15 @@ def userlogin(request):
         p=request.POST['password']
 
         user=usersignup.objects.filter(role=r,username=u,password=p)
+        c_id=usersignup.objects.get(username=u)
+        print("Current ID:",c_id.id)
+        c_role=c_id.role
+        print("Current Role:",c_role)
         if user:
             print("Login Successfull!")
             msg="Login Successfull!"
+            request.session['user']=u
+            request.session['c_role']=c_role
             return redirect('home')
         else:
             print("Invalid Login Cred...!")
@@ -44,6 +51,11 @@ def userlogin(request):
     return render(request,'user/userlogin.html',{'msg':msg})
 
 
-@login_required
 def home(request):
-    return render(request,'user/home.html')
+    user=request.session.get('user')
+    c_role=request.session.get('c_role')
+    return render(request,'user/home.html',{'c_role':c_role,'user':user})
+
+def userlogout(request):
+    logout(request)
+    return redirect('/')

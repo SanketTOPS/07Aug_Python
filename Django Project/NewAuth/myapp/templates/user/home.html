@@ -13,19 +13,83 @@
 </head>
 
 <body style="background-color: cadetblue;">
-   
+
     <div class="container">
         <center>
-            <h1>Welcome</h1>
+            <h1>Current Role is <i>{{c_role}}</i></h1>
         </center>
         <hr>
-      
+
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Hey!</strong> Welcome to HOME!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-      
+
+        <hr>
+
+        {% if c_role == 'Student' %}
+        <!-- Student Start -->
+        <div class="container">
+            <form method="post">
+                {%csrf_token%}
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Subject</label>
+                    <input type="text" name="sub" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Branch</label>
+                    <input type="text" name="branch" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-danger">Add Details</button>
+            </form>
+        </div>
+        <!-- Student End -->
+        {% else %}
+        <!-- Faculty Start -->
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Faculty End -->
+        {% endif %}
+
+        <hr>
+        <center><a class="btn btn-danger" href="/userlogout">Logout</a></center>
     </div>
+
 </body>
 
 </html>
