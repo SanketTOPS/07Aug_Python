@@ -7,4 +7,6 @@ urlpatterns = [
    path('userlogin/',views.userlogin,name='userlogin'),
    path('home/',views.home,name='home'),
    path('userlogout/',views.userlogout),
+   path('resetpass/',views.resetpass),
+   path('newpass/',views.newpass,name='newpass'),
 ]

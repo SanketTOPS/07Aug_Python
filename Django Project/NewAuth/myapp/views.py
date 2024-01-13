@@ -59,3 +59,35 @@ def home(request):
 def userlogout(request):
     logout(request)
     return redirect('/')
+
+def resetpass(request):
+    msg=""
+    if request.method=='POST':
+        unm=request.POST['username']
+        try:
+            user=usersignup.objects.get(username=unm)
+            uid=user.id
+            print("Userid:",uid)
+            request.session['uid']=uid
+            print("Username found....")
+            msg="Username found..."
+
+            return redirect('newpass')
+        except:
+            print("Error! Username not found...")
+            msg="Error! Username not found..."
+    return render(request,'user/resetpass.html',{'msg':msg})
+
+def newpass(request):
+    uid=request.session.get('uid')
+    cuid=usersignup.objects.get(id=uid)
+    if request.method=='POST':       
+        newpas=updateForm(request.POST)
+        if newpas.is_valid():
+            newpas=updateForm(request.POST,instance=cuid)
+            newpas.save()
+            print("Password updated!")
+            return redirect('userlogin')
+        else:
+            print("Error!Something went wrong....")
+    return render(request,'user/newpass.html')
